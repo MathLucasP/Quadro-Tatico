@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/menu.css">
+    <link rel="shortcut icon" type="image/png" href="img/Logo_site.png">
+</head> 
+<body>
+    <header>
+        
+    <nav>
+        <!-- Menu de Navegação -->
+        <ul class="menu">
+            <li><a href="quadro-tatico.html">Quadro Tático</a></li>
+            <!-- Botão para abrir o modal -->
+            <button id="profileIcon" class="icon-button">
+                <i class="fas fa-user"></i>
+            </button>
+        </ul>
+        
+    </nav>
+    <nav class="menu-lateral">
+        <div class="btn-expandir" id="menu-expandir">
+          <i class="bi bi-list" id="btn-exp"></i>
+        </div>
+        
+        <ul>
+            <li class="item-menu ativo">
+                <a href="index.html">
+                    <span class="icon"><i class="bi bi-house-fill"></i></span>
+                    <span class="txt-link">Ínicio</span>
+                </a>
+
+                <a href="https://taticalboard.my.canva.site/">
+                  <span class="icon"><i class="bi bi-people-fill"></i></span>
+                  <span class="txt-link">Equipe</span>
+                </a>
+
+                <a href="info.html">
+                    <span class="icon"><i class="bi bi-info-square-fill"></i></span>
+                    <span class="txt-link">Informações</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+        
+    </header>
+   
+    <main class="main">
+        
+
+        <h1 class="main-title">TATICAL BOARD</h1>
+        <center>
+            <a href="quadro-tatico.html">
+                <img class="imagem-campo" src="img/campo.png" alt="Campo Tático">
+            </a>
+        </center>
+        </main>
+    
+
+
+    <!-- Modal Unificado -->
+<div id="unifiedModal" class="modal" style="display: none;">
+    <div class="modal-content">
+        <span class="close" id="closeModal">&times;</span>
+        <div id="formContainer">
+            <!-- Formulário de Cadastro -->
+            <div id="registerForm" class="form-section">
+                <h2 class="texto-modal">Cadastrar</h2>
+                <form id="registerFormElement" action="php/register.php" method="POST">
+                    <input type="text" name="username" placeholder="Usuário" required>
+                    <input type="password" name="password" placeholder="Senha" required>
+                    <p class="terms-container">
+                        <input type="checkbox" id="termsCheckbox" name="termsCheckbox" required>
+                        <label for="termsCheckbox">
+                            Eu li e aceito os <a href="termos-de-uso.html" class="link-text">Termos de Uso</a>
+                        </label>
+                    </p>
+                    <button type="submit" id="btnCadastrar">Cadastrar</button>
+                </form>
+                <div id="registerError" style="color: red; margin-top: 10px; display: none;"></div>
+                <p>Já tem uma conta? <span id="switchToLogin" class="link-text">Login</span></p>
+            </div>
+            <!-- Formulário de Login -->
+            <div id="loginForm" class="form-section" style="display: none;">
+                <h2 class="texto-modal">Logar</h2>
+                <form id="loginFormElement" action="php/login.php" method="POST">
+                    <input type="text" name="username" placeholder="Usuário" required>
+                    <input type="password" name="password" placeholder="Senha" required>
+                    <button type="submit" id="btnLogar">Logar</button>
+                </form>
+                <div id="loginError" style="color: red; margin-top: 10px; display: none;"></div>
+                <p>Não tem uma conta? <span id="switchToRegister" class="link-text">Cadastrar</span></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+    <footer>
+        <p id="p-footer">&copy; 2024 Tatical Board. Todos os direitos reservados.</p>
+        <div class="social-icons">
+            <a href="https://wa.me/5513997584650?text=Quero%20saber%20mais%20sobre%20o%20tactical%20board" title="WhatsApp">
+                <i class="bi bi-whatsapp"></i>
+            </a>
+            <a href="https://www.instagram.com/quatrotatico?igsh=MWNlcjJvaHZ1cDZqOQ%3D%3D" title="Instagram">
+                <i class="bi bi-instagram"></i>
+            </a>
+            <a href="https://taticalboard.my.canva.site/integrantes" title="Equipe">
+                <i class="bi bi-people-fill"></i>
+            </a>
+        </div>
+    </footer>
+    <script src="js/script.js"></script>
+</body>
+</html>
