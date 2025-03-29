@@ -1,0 +1,791 @@
+:root {
+    --cor-principal: #4CAF50;
+    --cor-hover: #45a049;
+    --cor-campo: #006400;
+    --cor-branca: #ffffff;
+    --cor-seta: #ff2f00;
+    --cor-bola: #FFD700;
+    --cor-jogador: #1E90FF;
+    --cor-goleiro: #FF4500;
+    --tamanho-jogador: 40px;
+    --tamanho-goleiro: 35px;
+    --tamanho-bola: 25px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f0f0;
+    color: #333;
+}
+
+header {
+    background-color: #323232;
+    padding: 10px 20px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-bottom: 2px solid #04df58; 
+}
+
+h1 {
+    margin: 0;
+    font-size: 2rem;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+#toolbar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    padding: 0;
+}
+
+
+#toolbar.open {
+    left: 0;
+}
+
+#toolbar h2 {
+    margin-top: 50px;
+    color: white;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.elemento {
+    display: flex;
+    align-items: center;
+    cursor: grab;
+    user-select: none;
+}
+
+.elemento img {
+    width: 70px;
+    height: 70px;
+    transition: transform 0.3s ease;
+}
+
+.elemento:hover img {
+    transform: scale(1.1);
+}
+
+.elemento span {
+    margin-top: 5px;
+    font-size: 14px;
+    color: white;
+    text-align: center;
+}
+
+#campo {
+    position: relative;
+    width: 100%;
+    height: 570px;
+    background-image: url('img/campo.png');
+    background-size: cover;
+    border: 5px solid #327940;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.7);
+    overflow: hidden;
+    z-index: 0;
+}
+
+.jogador, .goleiro, .bola {
+    position: absolute;
+    background-size: cover;
+    background-repeat: no-repeat;
+    cursor: grab;
+    user-select: none;
+}
+
+.jogador img, .goleiro img, .bola img {
+    width: 100%;
+    height: 100%;
+}
+
+.jogador {
+    width: var(--tamanho-jogador);
+    height: var(--tamanho-jogador);
+}
+
+.goleiro {
+    width: var(--tamanho-goleiro);
+    height: var(--tamanho-goleiro);
+}
+
+.bola {
+    width: var(--tamanho-bola);
+    height: var(--tamanho-bola);
+}
+
+.linha {
+    stroke: var(--cor-seta);
+    stroke-width: 5;
+    marker-end: url(#arrowhead);
+}
+
+#controls {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center; 
+    gap: 10px; 
+}
+
+
+button {
+    padding: 13px 20px; 
+    font-size: 16px;
+    font-weight: bold;
+    background-color: var(--cor-principal);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.05);
+    transition: 
+        background-color 0.4s ease-in-out, 
+        transform 0.2s ease-in-out, 
+        box-shadow 0.4s ease-in-out; 
+    outline: none;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2); 
+    position: relative;
+}
+
+button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    height: 100%;
+}
+
+button:hover::before {
+    left: 100%;
+}
+
+button:hover {
+    background-color: var(--cor-hover);
+    transform: scale(1.08);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2), 0 6px 8px rgba(0, 0, 0, 0.1);
+}
+
+button:active {
+    transform: scale(0.98); 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15), 0 2px 4px rgba(0, 0, 0, 0.05);
+    background-color: var(--cor-hover);
+}
+
+button:focus-visible {
+    box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.3), 0 0 0 6px var(--cor-principal);
+}
+
+
+
+svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.selected {
+    box-shadow: 0 0 0 3px yellow;
+}
+
+
+
+nav.menu-lateral.expandir{
+    width: 290px;
+}
+
+nav.menu-lateral{
+    width: 120px;
+    height: 100%;
+    background-color: #323232;
+    padding: 40px 0 40px 1%;
+    box-shadow: 3px 0px 0px #04df58;
+    position: fixed;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    transition: 1s;
+    z-index: 100;
+}
+
+.btn-expandir{
+   width: 20%;
+   margin-left: 140px;
+}
+
+.btn-expandir > i{
+   color: #fff;
+   font-size: 30px;
+   cursor: pointer;
+}
+
+ul{
+   height: 100%;
+   list-style-type: none;
+   padding: 0;
+}
+
+ul li.item-menu{
+   transition: 2s;
+}
+
+ul li.item-menu a{
+   color: #fff;
+   text-decoration: none;
+   font-size: 20px;
+   padding: 20px 0px 0px 10px;
+   display: flex;
+   line-height: 30px;
+}
+
+ul li.item-menu a .txt-link{
+   margin-left: 60px;
+   transition: 1s;
+   opacity: 0;
+}
+
+
+nav.menu-lateral.expandir .txt-link{
+   margin-left: 15px;
+   margin-right: 100px;
+   opacity: 1;
+}
+
+ul li.item-menu a .icon > i{
+    font-size: 30px;
+    margin-left: 10px;
+    
+}
+
+
+.menu-lateral::-webkit-scrollbar {
+    width: 0.1px;
+    background-color: transparent;
+}
+
+.menu-lateral::-webkit-scrollbar-thumb {
+    background-color: transparent;
+}
+
+.menu-lateral::-webkit-scrollbar-thumb:hover {
+    background-color: transparent;
+}
+
+.menu-lateral::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+#menu-formacao {
+    display: flex; 
+    justify-content: center;
+    align-items: center; 
+    position: relative; 
+    top: 0;
+    z-index: 10; 
+}
+
+
+#menu-formacao-mobile {
+    display: none; 
+    justify-content: center;
+    align-items: center; 
+    position: relative; 
+    top: 0;
+    z-index: 10; 
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 20px;
+}
+
+.dropbtn {
+    background-color: var(--cor-principal);
+    color: white;
+    padding: 12px 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    border-radius: 8px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.dropdown-content button {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    background-color: #fff;
+    border: none;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.dropdown-content button:hover {
+    background-color: var(--cor-hover);
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: var(--cor-hover);
+}
+
+#campoContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    width: 100%;
+    background-color: #323232;
+    max-width: 900px; 
+    height: auto;
+    flex-grow: 1;
+    padding: 30px;
+    border-radius: 30px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+}
+
+.controles-superiores {
+    display: flex;
+    align-items: center; 
+    justify-content: space-between; 
+    gap: 15px; 
+    padding: 0px;
+}
+
+
+
+.btn-controle {
+    background-color: #4CAF50; 
+    color: white; 
+    border: none;
+    border-radius: 8px;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 20px; 
+    display: flex;
+    margin-bottom: 20px;
+    margin-left: 3px;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); 
+    transition: transform 0.2s ease-in-out, background-color 0.3s ease-in-out;
+}
+
+.btn-controle:hover {
+    background-color: #45a049; 
+    transform: scale(1.1); 
+}
+
+.btn-controle:active {
+    transform: scale(0.95); 
+    background-color: #388E3C; 
+}
+
+.controles-inferiores {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; 
+    gap: 10px; 
+    width: 100%; 
+    padding: 0px; 
+}
+
+.botoes-controle {
+    margin-top: 15px;
+    display: flex;
+    flex-direction: row; 
+    gap: 10px; 
+}
+
+@media (max-width: 1188px) {
+
+    .jogador, .goleiro {
+        width: 20px;
+        height: 20px;
+        transform: rotate(-90deg) !important;
+    }
+
+    .bola {
+        width: 15px;
+        height: 15px;
+    }
+
+    #toolbar {
+        width: 280px;
+        margin-left: -20px;
+        justify-content: center;
+    }
+
+    #toolbar.open {
+        left: 0;
+    }
+
+    .elemento img {
+        width: 30px;
+        height: 30px;
+        margin-left: 20px;
+    }
+
+    .elemento span {
+        font-size: 12px;
+    }
+
+    #campo {
+        position: relative;
+        width: 230px;
+        height: 341px;
+        background-image: url('img/campo2.png'); 
+        background-size: contain;
+        background-repeat: no-repeat;
+        border: 5px solid #333;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.7);
+        overflow: hidden;
+    }
+
+    #campoContainer {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 20px;
+        flex-grow: 1;
+        position: relative;
+        margin-left: 20px;
+        width: 100%;
+        max-width: 552px;
+        height: 852px;
+    }
+
+    .botoes-controle {
+        justify-content: center;
+    }
+
+    #menu-formacao {
+        display: none;
+        flex-wrap: wrap;
+        flex-direction: row;
+        justify-content: center;
+        z-index: 1;
+        margin-left: 20px !important;
+    }
+
+    #menu-formacao-mobile {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        justify-content: center;
+        z-index: 1;
+        margin-left: 20px !important;
+    }
+
+    #controls {
+        margin-left: 10%;
+        display: block;
+        gap: 8px;
+        position: relative;
+        z-index: 1;
+    }
+
+
+    h1 {
+        margin-left: 15px;
+    }
+
+    nav.menu-lateral.expandir{
+        z-index: 102;
+        width: 290px;
+    }
+
+    nav.menu-lateral{
+        width: 60px;
+        height: 100%;
+        background-color: #323232;
+        padding: 40px 0 40px 1%;
+        box-shadow: 3px 0px 0px #04df58;
+        position: fixed;
+        top: 0;
+        left: 0;
+        overflow: hidden;
+        transition: 1s;
+        z-index: 1;
+    }
+
+    #menu-expandir {
+        width: 0px;
+        position: fixed;
+        right: 97.5%;
+        top: 20px;
+    }
+
+    .item-menu {
+        margin-left: 150px;
+        margin-bottom: 20px;
+    }
+
+    .takes-buttons {
+        display: flex;
+        gap: 5px;
+        margin-left: 5px !important;
+        justify-content: left;
+        flex-wrap: wrap;
+    }
+}
+
+
+
+ /* A parte do codigo que eu removi e tinha antes na responsividade
+ - 
+    @media (max-width: 1000px) {
+    .jogador, .goleiro {
+        width: 40px;
+        height: 40px;
+    }
+
+    .bola {
+        width: 25px;
+        height: 25px;
+    }
+
+    #toolbar {
+        width: 250px;
+    }
+
+    #toolbar.open {
+        left: 0;
+    }
+
+    .elemento img {
+        width: 40px;
+        height: 40px;
+    }
+
+    .elemento span {
+        font-size: 12px;
+    }
+
+    #campo {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        background-image: url('img/campo2.png');
+        background-size: contain;
+        background-repeat: no-repeat;
+        border: 5px solid #333;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.7);
+        overflow: hidden;
+    }
+
+    #campoContainer {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 20px;
+        flex-grow: 1;
+        position: relative;
+        width: 100%;
+        max-width: 270px;
+        height: 400px;
+    }
+}
+ 
+ */
+#takes-container {
+    background-color: #323232;
+    padding: 10px;
+    width: 35%;
+    border-radius: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    margin-top: 15px;
+}
+
+#takes-container h3 {
+    color: #fff;
+    margin-left: 30px;
+    text-align: left;
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.takes-buttons {
+    display: flex;
+    gap: 5px;
+    margin-left: 15px;
+    justify-content: left;
+    flex-wrap: wrap;
+}
+
+.takes-buttons .take-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 5px;
+    background-color: #28a745; 
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    border: 1px solid #1e7e34;
+    transition: all 0.3s ease;
+}
+
+.takes-buttons .take-button.active {
+    background-color: #007232; 
+    color: #ffffff;
+    border: 1px solid #006919;
+}
+
+.takes-buttons .take-button:hover {
+    background-color:  #005424;
+    color: #ffffff;
+}
+
+#progress-bar-area {
+    width: 100%;
+    margin: 0px 10px 12px 10px; 
+}
+
+.progress-bar-container {
+    width: 100%;
+    height: 14px;
+    background: #e0e0e0;
+    border-radius: 7px;
+    overflow: hidden;
+    border: 1px solid #bbb;
+}
+
+.progress-bar {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #34d058, #28a745);
+    transition: width 0.2s ease-in-out;
+}
+
+nav {
+    display: flex;
+    justify-content: center;
+    background-color: #323232;
+    padding: 10px;
+}
+
+.home {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 15px;
+}
+
+.home li {
+    position: relative;
+}
+
+.home a {
+    text-decoration: none;
+    color: var(--cor-branca);
+    padding: 10px 20px;
+    display: block;
+    font-size: 1.5rem;
+    transition: var(--transicao);
+}
+
+.home a:hover {
+    background-color: var(--cor-hover);
+    border-radius: 4px;
+}
+
+.dropdown-speed {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-speed .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 100px;
+    box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-speed .dropdown-content button {
+    padding: 8px 12px;
+    width: 100%;
+    text-align: left;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.dropdown-speed .dropdown-content button:hover {
+    background-color: #ddd;
+}
+
+.dropdown-speed:hover .dropdown-content {
+    display: block;
+}
+
+
+.save-load-controls {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 14px;
+}
+
+.save-load-controls button {
+    background-color: var(--cor-principal); 
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.save-load-controls button:hover {
+    background-color: var(--cor-hover);
+}
+
+.save-load-controls button i {
+    font-size: 18px;
+}
+

@@ -1,0 +1,608 @@
+:root {
+    --cor-principal: #323232;
+    --cor-hover: #45a049;
+    --cor-secundaria: #009b00;
+    --cor-branca: #ffffff;
+    --cor-preta: #333333;
+    --cor-menu: #333;
+    --cor-popup-fundo: rgba(0, 0, 0, 0.8); 
+    --cor-popup-conteudo: #323232; 
+    --transicao: all 0.3s ease;
+}
+
+html, body {
+    height: 100%;
+} 
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: var(--cor-branca);
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+header {
+    background-color: var(--cor-principal);
+    padding: 20px 30px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-bottom: 2px solid #04df58; 
+}
+
+.main-title {
+    text-align: center;
+    font-size: 6vw;
+    font-weight: bold;
+    color: #009b00;
+    margin-bottom: 30px;
+    text-shadow: 8px 3px 0px #a0d1a2;
+}
+
+@media (max-width: 942px) {
+    .main-title {
+        font-size: 7vw;
+        margin-right:30px;
+        text-align: right;
+    }
+
+    nav.menu-lateral{
+        width: 45px !important;
+        height: 100% !important;
+    }
+
+    #menu-expandir {
+        width: 0px;
+        position: fixed !important;
+        right: 97.5%;
+        top: 20px;
+    }
+
+    .item-menu {
+        margin-left: 150px;
+        margin-bottom: 20px;
+    }
+}
+
+@media (max-width: 1199px) {
+    .main-title {
+        font-size: 8vw;
+    }
+}
+
+@media (max-width: 768px) {
+    .main-title {
+        font-size: 9vw;
+    }
+
+}
+
+@media (max-width: 480px) {
+    .main-title {
+        font-size: 10vw;
+    }
+
+}
+
+.imagem-campo {
+    width: 100%; /* Ajusta para preencher o container */
+    max-width: 650px; /* Tamanho máximo */
+    height: auto; /* Mantém a proporção da imagem */
+    border-radius: 15px; /* Borda arredondada */
+    margin-bottom: 3%;
+    border: 5px solid #009b00; /* Borda com cor e espessura definidas */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Adiciona sombra suave */
+}
+
+/* Responsividade para telas menores */
+@media (max-width: 768px) {
+    .imagem-campo {
+        max-width: 100%; /* Ajusta para caber em telas pequenas */
+        border-radius: 10px; /* Reduz o arredondamento */
+        margin-bottom: 5%; /* Aumenta o espaçamento inferior */
+    }
+}
+
+@media (max-width: 480px) {
+    .imagem-campo {
+        max-width: 100%;
+        border-radius: 8px; /* Ainda menor para telas muito pequenas */
+        margin-bottom: 8%; /* Mais espaçamento inferior */
+    }
+}
+nav {
+    display: flex;
+    justify-content: center;
+    background-color: var(--cor-principal);
+    padding: 0px;
+    overflow: hidden;
+}
+
+.menu {
+    text-align: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 15px;
+}
+
+.menu li {
+    position: relative;
+}
+
+.menu a {
+    text-decoration: none;
+    color: var(--cor-branca);
+    padding: 10px 20px;
+    font-size: 1.5rem;
+    display: block;
+    transition: var(--transicao);
+}
+
+.menu a:hover {
+    background-color: var(--cor-hover);
+    border-radius: 4px;
+}
+
+
+footer {
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    background-color: var(--cor-principal);
+    color: var(--cor-branca);
+    text-align: center;
+    padding: 20px 0;
+    box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
+    border-top: 2px solid #04df58;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    z-index: 101;
+}
+
+#p-footer {
+    font-size: 1.2rem;
+    margin: 0;
+}
+
+footer a {
+    text-decoration: none;
+    color: var(--cor-branca);
+    font-size: 1.5rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+footer a:hover {
+    transform: scale(1.2);
+}
+
+/* Ícones */
+footer a i {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+/* Estilização individual para hover */
+footer a[title="Equipe"]:hover {
+    color: #007bff; /* Azul (Bootstrap Blue) */
+}
+
+footer a[title="Instagram"]:hover {
+    color: #e1306c; /* Cor rosa do Instagram */
+}
+
+footer a[title="WhatsApp"]:hover {
+    color: #04df58; /* Cor verde para WhatsApp */
+}
+
+.modal {
+    display: none; /* Modal escondido por padrão */
+    position: fixed;
+    z-index: 102; /* Acima dos outros elementos */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--cor-popup-fundo); /* Fundo semi-transparente */
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: center; /* Centraliza verticalmente */
+}
+
+.modal-content {
+    background-color: var(--cor-popup-conteudo); /* Fundo do conteúdo */
+    padding: 30px; /* Espaçamento interno */
+    border-radius: 20px; /* Bordas arredondadas */
+    border: 5px solid var(--cor-secundaria); /* Borda de destaque */
+    text-align: center; /* Alinhamento centralizado */
+    width: 300px; /* Largura fixa */
+    position: relative; /* Para o botão de fechar */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra */
+    transform: translateY(-200px); /* Fora da tela no início */
+    opacity: 0; /* Invisível no início */
+    transition: var(--transicao); /* Transição suave */
+}
+
+.modal.show .modal-content {
+    transform: translateY(0); /* Move para posição final */
+    opacity: 1; /* Torna visível */
+}
+
+.texto-modal {
+    color: var(--cor-secundaria); /* Cor do texto principal */
+    margin-top: 0;
+    font-size: 32px !important; /* Tamanho destacado */
+}
+
+.modal-linha {
+    margin-left: -30px; /* Alinhamento personalizado */
+    width: 355px; /* Largura da linha */
+    border: var(--cor-secundaria) solid 3px; /* Borda */
+}
+
+.modal input {
+    width: 100%; /* Preenchimento horizontal completo */
+    padding: 10px; /* Espaçamento interno */
+    margin: 10px 0; /* Espaçamento externo */
+    border: 1px solid var(--cor-secundaria); /* Borda com cor secundária */
+    border-radius: 5px; /* Bordas arredondadas */
+    box-sizing: border-box; /* Inclui borda e padding no tamanho */
+}
+
+.modal button {
+    background-color: var(--cor-secundaria); /* Fundo do botão */
+    color: var(--cor-branca); /* Cor do texto */
+    padding: 10px 20px; /* Espaçamento interno */
+    border: none; /* Sem borda */
+    cursor: pointer; /* Aponta como botão */
+    font-size: 16px; /* Tamanho do texto */
+    margin-top: 10px; /* Espaçamento acima */
+    transition: var(--transicao); /* Transição suave */
+    width: 100%; /* Largura total */
+    border-radius: 5px; /* Bordas arredondadas */
+}
+
+.modal button:hover {
+    background-color: var(--cor-hover); /* Cor ao passar o mouse */
+}
+
+.close {
+    position: absolute; /* Posição no topo do modal */
+    top: 10px;
+    right: 20px;
+    font-size: 24px; /* Tamanho do ícone */
+    color: var(--cor-preta); /* Cor padrão */
+    cursor: pointer; /* Aponta como clicável */
+    transition: var(--transicao); /* Transição suave */
+}
+
+.close:hover {
+    color: var(--cor-hover); /* Cor ao passar o mouse */
+}
+
+
+.link-text {
+    color: var(--cor-secundaria); /* Verde para o link */
+    font-size: 1.2rem; /* Tamanho do texto aumentado */
+    text-decoration: underline; /* Adiciona sublinhado */
+    cursor: pointer; /* Mostra que é clicável */
+    transition: color 0.3s ease; /* Suaviza a mudança de cor */
+}
+
+.link-text:hover {
+    color: var(--cor-hover); /* Cor verde de hover (mais claro) */
+}
+
+.link-text:visited {
+    color: var(--cor-branca); /* Texto branco para links visitados */
+}
+
+/* Estilo para o <p> */
+p {
+    color: var(--cor-branca); /* Texto branco */
+    font-size: 1.2rem; /* Tamanho do texto ajustado */
+}
+
+#warn{
+    color: red;
+}
+
+
+
+/*absurdo não quero programarrrrrrrr
+
+/* Menu Lateral */
+.user-sidebar {
+    position: fixed;
+    right: -300px; /* Fora da tela por padrão */
+    top: 0;
+    height: 100%;
+    width: 300px;
+    background-color: #323232; /* Cor de fundo */
+    color: #ffffff; /* Cor do texto */
+    box-shadow: -4px 0 6px rgba(0, 0, 0, 0.1); /* Sombra */
+    transition: right 0.3s ease; /* Animação suave */
+    z-index: 1000;
+}
+
+.user-sidebar.open {
+    right: 0; /* Move para dentro da tela */
+}
+
+.user-sidebar-header {
+    text-align: center;
+    padding: 20px;
+    border-bottom: 1px solid #444;
+}
+
+.user-sidebar-header img {
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    margin-bottom: 10px;
+}
+
+.user-sidebar-content ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.user-sidebar-content ul li {
+    padding: 15px;
+    border-bottom: 1px solid #444;
+}
+
+.user-sidebar-content ul li a {
+    text-decoration: none;
+    color: #45a049; /* Cor dos links */
+    display: block;
+}
+
+.user-sidebar-content ul li a:hover {
+    background-color: #45a049;
+    color: #ffffff;
+}
+
+
+/* Botão para alternar o menu */
+.icon-button {
+    position: fixed;
+    top: 19px;
+    right: 19px 28px;
+    background-color: var(--cor-secundaria);
+    color: var(--cor-branca);
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 20px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease;
+}
+
+.icon-button:hover {
+    background-color: var(--cor-hover);
+}
+
+#profileIcon {
+    right: 28px;
+}
+
+.sidebar {
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: 300px;
+    height: 100%;
+    background-color: var(--cor-popup-conteudo);
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease;
+    transform: translateX(100%);
+    z-index: 1000;
+}
+.sidebar-content {
+    padding: 20px;
+    color: var(--cor-branca);
+}
+.sidebar-content h2, .sidebar-content h3 {
+    margin-top: 0;
+}
+.sidebar-content button {
+    background-color: var(--cor-secundaria);
+    color: var(--cor-branca);
+    border: none;
+    padding: 10px;
+    margin-top: 10px;
+    cursor: pointer;
+    width: 100%;
+}
+.sidebar-content button:hover {
+    background-color: var(--cor-hover);
+}
+
+
+/* Alinhamento da checkbox com o texto */
+label[for="termsCheckbox"] {
+    display: flex; /* Alinha itens horizontalmente */
+    align-items: center; /* Centraliza verticalmente */
+    gap: 8px; /* Espaço entre a checkbox e o texto */
+    color: var(--cor-branca); /* Cor do texto */
+    font-size: 1rem; /* Tamanho do texto */
+    cursor: pointer; /* Indica que o rótulo é clicável */
+}
+
+/* Estilo da checkbox */
+input[type="checkbox"] {
+    accent-color: var(--cor-secundaria); /* Cor personalizada da checkbox */
+    width: 20px; /* Tamanho horizontal */
+    height: 20px; /* Tamanho vertical */
+    cursor: pointer; /* Indica clicável */
+    border-radius: 4px; /* Borda arredondada */
+    margin: 0; /* Remove margens padrão */
+}
+
+/* Links dentro do rótulo */
+label[for="termsCheckbox"] a {
+    color: var(--cor-secundaria); /* Cor verde do link */
+    text-decoration: underline; /* Sublinhado para destaque */
+    transition: color 0.3s ease; /* Efeito suave ao passar o mouse */
+}
+
+label[for="termsCheckbox"] a:hover {
+    color: var(--cor-hover); /* Cor clara ao passar o mouse */
+}
+
+/* Alinhamento da checkbox e texto no parágrafo */
+p.terms-container {
+    display: flex; /* Alinha a checkbox e o texto horizontalmente */
+    align-items: center; /* Centraliza verticalmente */
+    gap: 8px; /* Espaço entre a checkbox e o texto */
+    margin: 10px 0; /* Espaço vertical ao redor do parágrafo */
+    color: var(--cor-branca); /* Cor do texto */
+    font-size: 1rem; /* Tamanho do texto */
+}
+
+/* Estilo da checkbox */
+p.terms-container input[type="checkbox"] {
+    accent-color: var(--cor-secundaria); /* Define a cor da checkbox */
+    width: 20px; /* Largura fixa */
+    height: 20px; /* Altura fixa */
+    cursor: pointer; /* Indica que é clicável */
+    margin: 0; /* Remove margens padrão */
+    border-radius: 4px; /* Opcional: bordas arredondadas */
+}
+
+/* Links dentro do rótulo */
+p.terms-container a {
+    color: var(--cor-secundaria); /* Verde para o link */
+    text-decoration: underline; /* Sublinhado para destaque */
+    transition: color 0.3s ease; /* Efeito suave ao passar o mouse */
+}
+
+p.terms-container a:hover {
+    color: var(--cor-hover); /* Verde claro ao passar o mouse */
+}
+
+
+
+/* Estilo para mensagens de erro */
+#registerError {
+    color: red; /* Texto vermelho para destaque */
+    font-size: 0.9rem; /* Tamanho reduzido */
+    margin-top: 5px; /* Espaço superior */
+    text-align: left; /* Alinhado ao início */
+    display: none; /* Ocultado por padrão */
+}
+
+
+
+/*
+
+Parte do menu de lateral que eu vou ficar alterando e brincando
+
+*/
+
+
+nav.menu-lateral.expandir{
+    width: 290px !important;
+}
+
+nav.menu-lateral{
+    width: 120px;
+    height: 100%;
+    background-color: #323232;
+    padding: 40px 0 40px 1%;
+    box-shadow: 3px 0px 0px #04df58;
+    position: fixed;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    transition: 1s;
+    z-index: 100;
+}
+
+.btn-expandir{
+    width: 30%;
+    margin-left: 140px;
+ }  
+ 
+ .btn-expandir > i{
+    color: #fff;
+    font-size: 30px;
+    cursor: pointer;
+ }
+
+ul{
+   height: 100%;
+   list-style-type: none;
+   padding: 0;
+}
+
+ul li.item-menu{
+   transition: 2s;
+}
+
+ul li.item-menu a{
+   color: #fff;
+   text-decoration: none;
+   font-size: 20px;
+   padding: 20px 0px 0px 10px;
+   display: flex;
+   line-height: 30px;
+}
+
+ul li.item-menu a .txt-link{
+   margin-left: 60px;
+   transition: 1s;
+   opacity: 0;
+}
+
+
+nav.menu-lateral.expandir .txt-link{
+   margin-left: 15px;
+   margin-right: 100px;
+   opacity: 1;
+}
+
+ul li.item-menu a .icon > i{
+    font-size: 30px;
+    margin-left: 10px;
+    
+}
+
+
+.menu-lateral::-webkit-scrollbar {
+    width: 0.1px;
+    background-color: transparent;
+}
+
+.menu-lateral::-webkit-scrollbar-thumb {
+    background-color: transparent;
+}
+
+.menu-lateral::-webkit-scrollbar-thumb:hover {
+    background-color: transparent;
+}
+
+.menu-lateral::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+
+
+
+/* Resposividade abusrda do texto main
+

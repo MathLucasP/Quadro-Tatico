@@ -1,0 +1,14 @@
+Tem que entrar por esse link aqui para funcionar o banco de dados: 
+http://localhost/site_futebol/index.html
+
+
+Esse é o código SQL para criar o database:
+CREATE DATABASE site_futebol;
+
+USE site_futebol;
+
+CREATE TABLE users (
+    id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(30) NOT NULL,
+    password VARCHAR(30) NOT NULL
+);
